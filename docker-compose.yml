@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  test-localstack:
+    container_name: test-localstack
+    image: localstack/localstack
+    ports:
+      - 4566:4566
+    environment:
+      - DEFAULT_REGION=ap-northeast-1
+      - DOCKER_SOCK=/var/run/docker.sock
+      - DEBUG=1
+    volumes:
+      - test-localstack:/var/lib/localstack/
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      test-network:
+
+networks:
+  test-network:
+volumes:
+  test-localstack:
